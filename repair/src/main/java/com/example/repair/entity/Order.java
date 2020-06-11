@@ -2,136 +2,56 @@ package com.example.repair.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 
+
+@Data
 @Entity
 @Table(name = "wcy_order")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id;  //编号
 
-    private String user;
+    private String orderNumber;  //订单编号
 
-    private String phoneNumber;
+    private String user;  //用户名字
 
-    private String address;
+    private String phoneNumber;  //电话号码
 
-    private String repairType;
+    private String address;  //地址
 
-    private String text;
+    private String orderCreate;  //下单时间
 
-    @Lob
-    private byte[] pic;
+    private String repairType;  //维修类型
 
-    private Float probablyPrice;
+    private String text;  //问题文字描述
 
-    private String serverTime;
 
-    private Float finalPrice;
+    private String pic;  //问题图片上传(URL)
 
-    private String code;
+    private Float probablyPrice;  //大概价格
+
+    private String serverTime;  //服务时间
+
+    private Float finalPrice;  //最终价格
+
+    private String code;  //状态
+
+    private String evaluation;  //评价
+
+    private String undoOder;  //撤单
+
+    private String chargeBack;  //退单
 
     @JsonIgnoreProperties("orders")
     @ManyToOne
     @JoinColumn(name = "master_id")
-    private RepairMan repairMan;
+    private RepairMan repairMan;  //外键，关联修理工
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getRepairType() {
-        return repairType;
-    }
-
-    public void setRepairType(String repairType) {
-        this.repairType = repairType;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public byte[] getPic() {
-        return pic;
-    }
-
-    public void setPic(byte[] pic) {
-        this.pic = pic;
-    }
-
-    public Float getProbablyPrice() {
-        return probablyPrice;
-    }
-
-    public void setProbablyPrice(Float probablyPrice) {
-        this.probablyPrice = probablyPrice;
-    }
-
-    public String getServerTime() {
-        return serverTime;
-    }
-
-    public void setServerTime(String serverTime) {
-        this.serverTime = serverTime;
-    }
-
-    public Float getFinalPrice() {
-        return finalPrice;
-    }
-
-    public void setFinalPrice(Float finalPrice) {
-        this.finalPrice = finalPrice;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public RepairMan getRepairMan() {
-        return repairMan;
-    }
-
-    public void setRepairMan(RepairMan repairMan) {
-        this.repairMan = repairMan;
-    }
 }

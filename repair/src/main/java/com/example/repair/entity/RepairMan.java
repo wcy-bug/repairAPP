@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 @Entity
 @Table(name = "wcy_repairMan")
 public class RepairMan {
@@ -29,6 +31,10 @@ public class RepairMan {
     private String latitude;  //纬度
 
     private String longitude;  //经度
+
+    private Float balance;  //余额
+
+    private String token;  //身份令牌
 
     @JsonIgnoreProperties("repairMan")
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "repairMan")
@@ -112,5 +118,21 @@ public class RepairMan {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public Float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
