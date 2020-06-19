@@ -13,4 +13,10 @@ public interface orderDao extends JpaRepository<Order,Long> {
 
     Page<Order> findByCode(String code, Pageable pageable);
 
+    Order findOrderByOrderNumber(String orderNumber);
+
+    Order findOrderByUser(String userName);
+
+    List<Order> findByRepairMan_Id(Long id);
+
 }

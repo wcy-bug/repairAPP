@@ -17,4 +17,6 @@ public interface totalDao extends JpaRepository<totalCount,Long> {
 
     totalCount findTotalCountById(Long id);
 
+    List<totalCount> findByDate(String date);
+
 }

@@ -6,9 +6,11 @@ import com.example.repair.Result.Result;
 import com.example.repair.Service.UserService;
 import com.example.repair.Socket.WebSocketConfig;
 import com.example.repair.Socket.WebSocketServer;
+import com.example.repair.Utils.DateUtil;
 import com.example.repair.Utils.JedisUtil;
 import com.example.repair.Utils.MD5Utils;
 import com.example.repair.annotation.AuthToken;
+import com.example.repair.entity.Order;
 import com.example.repair.entity.RepairMan;
 import com.example.repair.entity.totalCount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +128,18 @@ public class RepairController {
             return Result.success(CodeMsg.SUCCESS);
         }catch (Exception e){
             return  Result.error(CodeMsg.ERROR);
+        }
+    }
+
+
+    /**根据修理工姓名查询修理工*/
+    @GetMapping("/findByRepair")
+    public Result<RepairMan> findByRepair(@RequestParam String RepairName){
+        try {
+            RepairMan repairMan=userService.findByRepair(RepairName);
+            return Result.success(repairMan);
+        }catch (Exception e){
+            return Result.error(CodeMsg.ERROR);
         }
     }
 

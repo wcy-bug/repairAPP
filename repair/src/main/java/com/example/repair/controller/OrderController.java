@@ -8,6 +8,7 @@ import com.example.repair.Utils.DateUtil;
 import com.example.repair.Utils.uuidUtil;
 import com.example.repair.entity.Order;
 import com.example.repair.entity.RepairMan;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 
 @CrossOrigin
@@ -31,7 +33,7 @@ public class OrderController {
 
     /**用户下单*/
     @PostMapping("/place")
-    public Result<Order> insert(@RequestParam String user,@RequestParam String phoneNumber,@RequestParam String address,@RequestParam String repairType,@RequestParam String text,@RequestParam(required = false) MultipartFile fileField) throws IOException {
+    public Result<Order> insert(@RequestParam(required = false) String user,@RequestParam String phoneNumber,@RequestParam String address,@RequestParam String repairType,@RequestParam String text,@RequestParam(required = false) MultipartFile fileField) throws IOException {
         /*图片存储URL*/
         String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath(); //存储到static目录下
         System.out.println(staticPath);
@@ -200,6 +202,43 @@ public class OrderController {
             order1.setEvaluation(evaluation);
             userService.insert(order1);
             return Result.success(CodeMsg.SUCCESS);
+        }catch (Exception e){
+            return Result.error(CodeMsg.ERROR);
+        }
+    }
+
+
+    /**根据订单号查询订单详情*/
+    @GetMapping("/findByNumber")
+    public Result<Order> findByOrderNumber(@RequestParam String orderNumber){
+        try {
+            Order order=userService.findByOrderNumber(orderNumber);
+            return Result.success(order);
+        }catch (Exception e){
+            return Result.error(CodeMsg.ERROR);
+        }
+    }
+
+    /**根据用户姓名查询订单详情*/
+    @GetMapping("/findByUser")
+    public Result<Order> findByUser(@RequestParam String userName){
+        try {
+            Order order=userService.findByUser(userName);
+            return Result.success(order);
+        }catch (Exception e){
+            return Result.error(CodeMsg.ERROR);
+        }
+    }
+
+
+    /**根据修理工姓名查询订单详情*/
+    @GetMapping("/findByRepair")
+    public Result<List<Order>> findByRepair(@RequestParam String RepairName){
+        try {
+            RepairMan repairMan=userService.findByRepair(RepairName);
+            Long repairId=repairMan.getId();
+            List<Order> orders=userService.findByRepairId(repairId);
+            return Result.success(orders);
         }catch (Exception e){
             return Result.error(CodeMsg.ERROR);
         }

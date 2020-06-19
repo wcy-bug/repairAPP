@@ -16,6 +16,8 @@ public interface repairDao extends JpaRepository<RepairMan,Long> {
 
     RepairMan findRepairManByPhoneNumber(String phoneNumber);
 
+    RepairMan findRepairManByUserName(String userName);
+
     RepairMan findRepairManByPhoneNumberAndPassword(String phoneNumber,String password);
 
     @Query("Select r from RepairMan r where r.valid=1")

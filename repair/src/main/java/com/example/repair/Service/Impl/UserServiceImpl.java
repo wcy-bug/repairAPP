@@ -64,6 +64,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Order findByOrderNumber(String orderNumber) {
+        return this.orderDao.findOrderByOrderNumber(orderNumber);
+    }
+
+    @Override
+    public Order findByUser(String userName) {
+        return this.orderDao.findOrderByUser(userName);
+    }
+
+    @Override
+    public List<Order> findByRepairId(Long id) {
+        return this.orderDao.findByRepairMan_Id(id);
+    }
+
+    @Override
     public Page<Order> findByCode(String code,Pageable pageable) {
         return this.orderDao.findByCode(code,pageable);
     }
@@ -89,6 +104,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public RepairMan findByRepair(String RepairName) {
+        return this.repairDao.findRepairManByUserName(RepairName);
+    }
+
+    @Override
     public totalCount insert(totalCount totalCount) {
         return totalDao.save(totalCount);
     }
@@ -96,6 +116,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public totalCount findTotalById(Long id) {
         return this.totalDao.findTotalCountById(id);
+    }
+
+    @Override
+    public List<totalCount> findByDate(String date) {
+        return this.totalDao.findByDate(date);
     }
 
     @Override

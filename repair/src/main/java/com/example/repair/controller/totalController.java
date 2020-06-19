@@ -70,5 +70,16 @@ public class totalController {
         }
     }
 
+    /**根据日期查询统计结果*/
+    @GetMapping("/findByDate")
+    public Result<List<totalCount>> findByDate(@RequestParam String date){
+        try {
+            List<totalCount> totalCounts=userService.findByDate(date);
+            return Result.success(totalCounts);
+        }catch (Exception e){
+            return Result.error(CodeMsg.ERROR);
+        }
+    }
+
 
 }

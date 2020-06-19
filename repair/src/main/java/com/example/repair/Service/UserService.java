@@ -22,6 +22,12 @@ public interface UserService {
 
     Order judgeTrue(Long id);
 
+    Order findByOrderNumber(String orderNumber);
+
+    Order findByUser(String userName);
+
+    List<Order> findByRepairId(Long id);
+
     Page<Order> findByCode(String code,Pageable pageable);
 
     RepairMan Register(RepairMan repairMan);
@@ -32,9 +38,13 @@ public interface UserService {
 
     RepairMan findByPhoneNumber(String phoneNumber);
 
+    RepairMan findByRepair(String RepairName);
+
     totalCount insert(totalCount totalCount);
 
     totalCount findTotalById(Long id);
+
+    List<totalCount> findByDate(String date);
 
     Page<totalCount> findTrue(Pageable pageable);
 

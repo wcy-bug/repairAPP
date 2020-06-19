@@ -28,7 +28,7 @@ public class MyInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         // 判断接口是否需要登录
         AuthToken methodAnnotation = method.getAnnotation(AuthToken.class);
-        // 有 @LoginRequired 注解，需要认证
+        // 有 @AuthToken 注解，需要认证
 
         if (methodAnnotation == null) {
             System.out.println("没有AuthToken,进行token判断");
